@@ -1,0 +1,6 @@
+@AnonymousFeedback.Api_HostAddress = http://localhost:5027
+
+GET {{AnonymousFeedback.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
