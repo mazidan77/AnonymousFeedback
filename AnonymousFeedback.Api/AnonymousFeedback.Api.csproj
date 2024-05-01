@@ -15,4 +15,8 @@
     <Folder Include="Controllers\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AnonymousFeedback.Infrastructure\AnonymousFeedback.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>
