@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AnonymousFeedback.Domian.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,5 +21,7 @@ namespace AnonymousFeedback.Infrastructure
             base.OnModelCreating(modelBuilder);
         }
 
+        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<FeedBack> FeedBacks { get; set; }
     }
 }

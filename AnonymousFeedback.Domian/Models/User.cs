@@ -15,7 +15,7 @@ namespace AnonymousFeedback.Domian.Models
 
         public string Email { get; set; }
 
-        public int MobileNumber {  get; set; }
+        public int? MobileNumber {  get; set; }
 
         public string FirstName { get; set; }
         public string LastName { get; set; }

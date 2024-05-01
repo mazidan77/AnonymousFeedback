@@ -15,11 +15,13 @@ namespace AnonymousFeedback.Infrastructure.Configs
         {
             builder.HasOne(f => f.Sender)
               .WithMany(u => u.SentFeedbacks) 
-              .HasForeignKey(f => f.SenderUserName);
+              .HasForeignKey(f => f.SenderUserName)
+              .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(f => f.Receiver)
              .WithMany(u => u.ReceivedFeedbacks)
-             .HasForeignKey(f => f.ReceiverUserName);
+             .HasForeignKey(f => f.ReceiverUserName)
+               .OnDelete(DeleteBehavior.Restrict); 
 
         }
     }
