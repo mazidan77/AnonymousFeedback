@@ -15,4 +15,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AnonymousFeedback.Domian\AnonymousFeedback.Domian.csproj" />
+  </ItemGroup>
+
 </Project>
