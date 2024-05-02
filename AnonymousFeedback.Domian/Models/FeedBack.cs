@@ -15,11 +15,11 @@ namespace AnonymousFeedback.Domian.Models
         public bool IsAnonymous { get; set; }
          public bool IsRead { get; set; }
 
-        public string SenderUserName { get; set; }
+        public int SenderId { get; set; }
 
         public virtual User Sender { get; set; }
 
-        public string ReceiverUserName { get; set; }
+        public int ReceiverId { get; set; }
         public virtual User Receiver { get; set; }
 
 
