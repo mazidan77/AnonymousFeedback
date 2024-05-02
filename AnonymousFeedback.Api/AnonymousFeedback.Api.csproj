@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AnonymousFeedback.Application\AnonymousFeedback.Application.csproj" />
     <ProjectReference Include="..\AnonymousFeedback.Infrastructure\AnonymousFeedback.Infrastructure.csproj" />
   </ItemGroup>
 

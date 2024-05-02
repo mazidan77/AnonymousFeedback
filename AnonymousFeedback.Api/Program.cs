@@ -1,4 +1,5 @@
 
+using AnonymousFeedback.Application.Mapper;
 using AnonymousFeedback.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,7 +19,7 @@ namespace AnonymousFeedback.Api
             builder.Services.AddSwaggerGen();
 
             builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
+            builder.Services.AddAutoMapper(typeof(UserMapper));
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
