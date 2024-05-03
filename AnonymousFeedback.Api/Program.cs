@@ -1,8 +1,12 @@
 
+using AnonymousFeedback.Application.Managers;
 using AnonymousFeedback.Application.Mapper;
+using AnonymousFeedback.Domian.IManagers;
 using AnonymousFeedback.Domian.IRepositories;
+using AnonymousFeedback.Domian.IUnitOfWork;
 using AnonymousFeedback.Infrastructure;
 using AnonymousFeedback.Infrastructure.Repositories;
+using AnonymousFeedback.Infrastructure.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 
 namespace AnonymousFeedback.Api
@@ -23,6 +27,8 @@ namespace AnonymousFeedback.Api
             builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
             builder.Services.AddAutoMapper(typeof(UserMapper));
             builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            builder.Services.AddScoped(typeof(IBaseManager<>), typeof(BaseManager<>));
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             var app = builder.Build();
 
            
