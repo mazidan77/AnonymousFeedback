@@ -1,6 +1,8 @@
 
 using AnonymousFeedback.Application.Mapper;
+using AnonymousFeedback.Domian.IRepositories;
 using AnonymousFeedback.Infrastructure;
+using AnonymousFeedback.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace AnonymousFeedback.Api
@@ -20,7 +22,10 @@ namespace AnonymousFeedback.Api
 
             builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
             builder.Services.AddAutoMapper(typeof(UserMapper));
+            builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             var app = builder.Build();
+
+           
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())

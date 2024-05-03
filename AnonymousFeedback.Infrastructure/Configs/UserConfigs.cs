@@ -13,7 +13,8 @@ namespace AnonymousFeedback.Infrastructure.Configs
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
-            
+            builder.Property(x => x.UserName).IsRequired();
+            builder.HasIndex(x => x.UserName).IsUnique();
 
             builder.Property(x => x.Email).IsRequired().HasMaxLength(100);
             builder.Property(x => x.Password).IsRequired().HasMaxLength(50);

@@ -13,6 +13,7 @@ namespace AnonymousFeedback.Infrastructure.Configs
     {
         public void Configure(EntityTypeBuilder<FeedBack> builder)
         {
+            builder.Property(x=>x.Content).IsRequired().HasMaxLength(500);
             builder.HasOne(f => f.Sender)
               .WithMany(u => u.SentFeedbacks) 
               .HasForeignKey(f => f.SenderId)
