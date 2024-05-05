@@ -17,11 +17,11 @@ namespace AnonymousFeedback.Infrastructure.Configs
             builder.HasIndex(x => x.UserName).IsUnique();
 
             builder.Property(x => x.Email).IsRequired().HasMaxLength(100);
-            builder.Property(x => x.Password).IsRequired().HasMaxLength(50);
+            builder.Property(x => x.Password).IsRequired().HasMaxLength(500);
      
             builder.Property(x => x.FirstName).IsRequired().HasMaxLength(50);
             builder.Property(x => x.LastName).IsRequired().HasMaxLength(50);
-           
+           builder.Property(x=>x.RoleId).HasDefaultValue(2);
 
         }
     }

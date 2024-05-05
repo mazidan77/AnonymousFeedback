@@ -26,6 +26,7 @@ namespace AnonymousFeedback.Domian.IRepositories
         IEnumerable<TEntity> GetSome(Expression<Func<TEntity, bool>> where);
 
         IEnumerable<TEntity> GetAll();
+        Task<TEntity> GetBy(Expression<Func<TEntity, bool>> where);
         void Update(TEntity entity);
 
     }

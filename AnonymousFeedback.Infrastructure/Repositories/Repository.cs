@@ -65,6 +65,12 @@ namespace AnonymousFeedback.Infrastructure.Repositories
             return await _dbContext.Set<TEntity>().FindAsync(id);
         }
 
+        public async Task<TEntity> GetBy(Expression<Func<TEntity,bool>> where)
+        {
+           return await _dbContext.Set<TEntity>().FirstOrDefaultAsync(where);
+
+        }
+
         public IEnumerable<TEntity> GetSome(Expression<Func<TEntity,bool>>where)
         {
             return _dbContext.Set<TEntity>().Where(where).ToList();

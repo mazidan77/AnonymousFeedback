@@ -22,6 +22,12 @@ namespace AnonymousFeedback.Domian.Models
 
         public bool IsVerified { get; set; }
 
+
+        public int RoleId {  get; set; }
+        public virtual Role Role { get; set; }
+
+
+
         public virtual List<FeedBack> SentFeedbacks { get; set; }
         public virtual List<FeedBack> ReceivedFeedbacks { get; set; }
 
