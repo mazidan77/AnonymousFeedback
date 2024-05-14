@@ -3,6 +3,7 @@
 using AnonymousFeedback.Domian.IManagers;
 using AnonymousFeedback.Domian.Models;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics.Contracts;
@@ -10,6 +11,7 @@ using System.Diagnostics.Contracts;
 namespace AnonymousFeedback.Api.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize]
     [ApiController]
     public class UserController : ControllerBase
     {

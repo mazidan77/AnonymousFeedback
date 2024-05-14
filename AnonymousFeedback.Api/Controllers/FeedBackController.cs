@@ -1,9 +1,11 @@
 ﻿using AnonymousFeedback.Application.Dtos.FeedBackDto;
 using AnonymousFeedback.Domian.IManagers;
+using AnonymousFeedback.Domian.IUsers;
 using AnonymousFeedback.Domian.Models;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace AnonymousFeedback.Api.Controllers
 {
@@ -13,11 +15,13 @@ namespace AnonymousFeedback.Api.Controllers
     {
         private readonly IBaseManager<FeedBack> _feedBackManager;
         protected readonly IMapper _mapper;
+        private readonly IUserContext _userContextService;
 
-        public FeedBackController(IBaseManager<FeedBack> feedBackManager, IMapper mapper)
+        public FeedBackController(IBaseManager<FeedBack> feedBackManager, IMapper mapper, IUserContext userContextService)
         {
             _feedBackManager= feedBackManager;
             _mapper= mapper;
+            _userContextService = userContextService;
         }
 
         [HttpPost]
@@ -25,6 +29,9 @@ namespace AnonymousFeedback.Api.Controllers
         {
             FeedBack entity = _mapper.Map<FeedBack>(feedBackPostDto);
 
+            
+
+            entity.SenderId = _userContextService.GetCurrentUserId();
             await _feedBackManager.AddWithComplete(entity);
 
             return Ok(feedBackPostDto);
@@ -45,7 +52,7 @@ namespace AnonymousFeedback.Api.Controllers
         public virtual IActionResult GetSendFeedback(int senderId)
         {
             var entity = _feedBackManager.GetSome(x => x.SenderId == senderId);
-
+           
             var dtoList = _mapper.Map<List<FeedBackGetDto>>(entity);
             return Ok(dtoList);
         }

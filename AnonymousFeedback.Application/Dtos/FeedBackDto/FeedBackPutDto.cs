@@ -9,5 +9,6 @@ namespace AnonymousFeedback.Application.Dtos.FeedBackDto
     public class FeedBackPutDto : FeedBackBaseDto
     {
         public int Id { get; set; }
+        public int SenderId { get; set; }
     }
 }

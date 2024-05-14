@@ -9,7 +9,7 @@ namespace AnonymousFeedback.Application.Dtos.FeedBackDto
     public class FeedBackGetDto : FeedBackBaseDto
     {
         public int Id { get; set; }
-
+        public int SenderId { get; set; }
         public string SenderUserName { get; set; }
 
         public string ReceiverUserName { get; set; }
