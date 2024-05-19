@@ -10,5 +10,8 @@ namespace AnonymousFeedback.Application.Dtos.FeedBackDto
     {
         public int Id { get; set; }
         public int SenderId { get; set; }
+
+        public bool IsRepalied { get; set; }
+        public string Replay { get; set; }
     }
 }

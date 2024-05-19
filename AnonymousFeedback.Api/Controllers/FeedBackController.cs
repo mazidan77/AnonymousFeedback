@@ -39,10 +39,27 @@ namespace AnonymousFeedback.Api.Controllers
         }
 
         [HttpGet("GetRecivedFeedback")]
-        public virtual IActionResult GetRecivedFeedback(int recevierId)
+        public virtual IActionResult GetRecivedFeedback(int recevierId )
         {
-            var entity = _feedBackManager.GetSome(x=>x.ReceiverId ==recevierId);
+            var entity = _feedBackManager.GetSome(x=>x.ReceiverId ==recevierId );
 
+            var dtoList = _mapper.Map<List<FeedBackGetDto>>(entity);
+            return Ok(dtoList);
+        }
+
+        [HttpGet("GetFeedbackById")]
+        public async  virtual Task<IActionResult> GetFeedbackById(int id)
+        {
+            var entity = await  _feedBackManager.GetById( id);
+
+            var feedback = _mapper.Map<FeedBackGetDto>(entity);
+            return Ok(feedback);
+        }
+
+        [HttpGet("GetNewFeedBack")]
+        public virtual IActionResult GetNewFeedBack(int recevierId)
+        {
+            var entity = _feedBackManager.GetSome(x => x.ReceiverId == recevierId && x.IsRead==false);
             var dtoList = _mapper.Map<List<FeedBackGetDto>>(entity);
             return Ok(dtoList);
         }
@@ -67,6 +84,15 @@ namespace AnonymousFeedback.Api.Controllers
             return Ok();
         }
 
+
+        [HttpPut("AddReplay")]
+        public async virtual Task<IActionResult> AddReplay(FeedBackPutDto feedBackPutDto)
+        {
+            FeedBack entity = _mapper.Map<FeedBack>(feedBackPutDto);
+            var result = await _feedBackManager.UpdateWithComplete(entity);
+
+            return Ok(result);
+        }
 
     }
 }
