@@ -16,7 +16,7 @@ namespace AnonymousFeedback.Domian.Models
         public bool IsAnonymous { get; set; }
          public bool IsRead { get; set; }
          public bool IsReplied { get; set; }
-        public string Replay { get; set; }
+        public string? Replay { get; set; }
 
         public int SenderId { get; set; }
 

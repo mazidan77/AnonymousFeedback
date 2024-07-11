@@ -55,7 +55,7 @@ namespace AnonymousFeedback.Application.Managers
         {
             var user = await _IdentityRepository.GetBy(x=>x.UserName==dto.UserName);
             if (user == null || !_passwordHasher.VerifyPassword(dto.Password, user.Password))
-                throw new UnauthorizedAccessException("Invalid credentials!");
+                return null;
 
             return GenerateJwtToken(user);
         }
@@ -74,7 +74,9 @@ namespace AnonymousFeedback.Application.Managers
                 new Claim(ClaimTypes.Role, user.Role.Name),
                 new Claim("FName", user.FirstName),
                 new Claim("LName", user.LastName),
-               
+                new Claim("IsVerified", user.IsVerified.ToString()),
+                 
+
                 }),
                 Expires = DateTime.UtcNow.AddDays(1),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)

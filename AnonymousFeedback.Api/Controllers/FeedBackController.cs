@@ -64,6 +64,14 @@ namespace AnonymousFeedback.Api.Controllers
             return Ok(dtoList);
         }
 
+        [HttpGet("GetNotReplayedFeedBack")]
+        public virtual IActionResult GetNotReplayedFeedBack(int recevierId)
+        {
+            var entity = _feedBackManager.GetSome(x => x.ReceiverId == recevierId && x.IsReplied == false);
+            var dtoList = _mapper.Map<List<FeedBackGetDto>>(entity);
+            return Ok(dtoList);
+        }
+
 
         [HttpGet("GetSendFeedback")]
         public virtual IActionResult GetSendFeedback(int senderId)
@@ -88,8 +96,16 @@ namespace AnonymousFeedback.Api.Controllers
         [HttpPut("AddReplay")]
         public async virtual Task<IActionResult> AddReplay(FeedBackPutDto feedBackPutDto)
         {
-            FeedBack entity = _mapper.Map<FeedBack>(feedBackPutDto);
-            var result = await _feedBackManager.UpdateWithComplete(entity);
+
+
+            var feedBack = await _feedBackManager.GetById(feedBackPutDto.Id);
+
+            feedBack.IsReplied = true;
+
+            feedBack.Replay=feedBackPutDto.Replay;
+
+
+            var result = await _feedBackManager.UpdateWithComplete(feedBack);
 
             return Ok(result);
         }

@@ -79,6 +79,12 @@ namespace AnonymousFeedback.Application.Managers
             return q;
         }
 
+        public async Task<TEntity> GetBy(Expression<Func<TEntity, bool>> where)
+        {
+            return await _repository.GetBy(where);
+
+        }
+
         public virtual IEnumerable<TEntity> GetAll()
         {
             return _repository.GetAll();

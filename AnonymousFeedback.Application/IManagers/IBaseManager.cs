@@ -20,6 +20,7 @@ namespace AnonymousFeedback.Domian.IManagers
         Task<int> DeleteWithComplete(TEntity entity);
         IEnumerable<TEntity> GetAll();
         Task<TEntity> GetById(object id);
+        Task<TEntity> GetBy(Expression<Func<TEntity, bool>> where);
         IEnumerable<TEntity> GetSome(Expression<Func<TEntity, bool>> where);
         void RemoveRange(IEnumerable<TEntity> list);
         void Update(TEntity entity);

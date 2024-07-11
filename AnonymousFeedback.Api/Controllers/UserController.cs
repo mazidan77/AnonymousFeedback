@@ -11,7 +11,7 @@ using System.Diagnostics.Contracts;
 namespace AnonymousFeedback.Api.Controllers
 {
     [Route("api/[controller]")]
-    [Authorize]
+   // [Authorize]
     [ApiController]
     public class UserController : ControllerBase
     {
@@ -28,6 +28,18 @@ namespace AnonymousFeedback.Api.Controllers
         {
             var users = _userManager.GetAll();
             var usersDto = _mapper.Map<List<UserGetDto>>(users);
+            return Ok(usersDto);
+        }
+
+        [HttpGet("byUserName")]
+        public async Task<IActionResult> GetByUserName(string username)
+        {
+            var users =  await _userManager.GetBy(x=>x.UserName==username);
+            if(users == null)
+            {
+                return NotFound("No User");
+            }
+            var usersDto = _mapper.Map<UserGetDto>(users);
             return Ok(usersDto);
         }
 

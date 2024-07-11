@@ -13,6 +13,7 @@ using AnonymousFeedback.Infrastructure.UnitOfWork;
 using AnonymousFeedback.Infrastructure.Users;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
@@ -26,9 +27,9 @@ namespace AnonymousFeedback.Api
             var builder = WebApplication.CreateBuilder(args);
 
 
-            
+
             // Adding Authentication
-         
+
 
             builder.Services.AddAuthentication(options =>
             {
@@ -50,7 +51,15 @@ namespace AnonymousFeedback.Api
             });
             // Add services to the container.
 
-            builder.Services.AddControllers();
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAllOrigins",
+                    builder => builder.AllowAnyOrigin()
+                                      .AllowAnyMethod()
+                                      .AllowAnyHeader());
+            });
+
+                builder.Services.AddControllers();
 
             builder.Services.AddHttpContextAccessor();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -111,6 +120,7 @@ namespace AnonymousFeedback.Api
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+            app.UseCors("AllowAllOrigins");
 
             app.UseHttpsRedirection();
 

@@ -28,6 +28,11 @@ namespace AnonymousFeedback.Api.Controllers
         public async Task<IActionResult> Login([FromBody] LoginDto dto)
         {
             var token = await _identityManager.LoginAsync(dto);
+            if(token == null)
+            {
+                return BadRequest("Invaled UserName Or Password");
+            }
+
             return Ok(new { Token = token });
         }
     }
